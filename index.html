@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raíces Play | Juegos Tradicionales de México</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/theme.css">
+  <link rel="stylesheet" href="css/games.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+  <div class="paper-cut" aria-hidden="true">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- LOGIN -->
+  <section class="auth-screen" id="authScreen">
+    <div class="auth-deco one"></div>
+    <div class="auth-deco two"></div>
+    <div class="auth-deco three"></div>
+
+    <div class="auth-card">
+      <div class="auth-visual">
+        <div class="auth-brand">
+          <div class="brand-mark">🌵</div>
+          <div>Raíces Play</div>
+        </div>
+
+        <div class="auth-copy">
+          <div class="eyebrow">México • tradición • juego</div>
+          <h1>La diversión<br>también tiene<br><span>raíces.</span></h1>
+          <p>
+            Reúne a tus amigos, desbloquea logros y vuelve a jugar esos
+            clásicos que nunca necesitaron gráficos de 900 GB para ser
+            entretenidos.
+          </p>
+        </div>
+
+        <div class="auth-game-pills">
+          <div class="auth-game-pill">🪀 Yoyo</div>
+          <div class="auth-game-pill">🔵 Canicas</div>
+          <div class="auth-game-pill">✈️ Avionsito</div>
+          <div class="auth-game-pill">🪢 Cuerda</div>
+        </div>
+      </div>
+
+      <div class="auth-panel">
+        <div class="eyebrow" style="color:var(--green)">BIENVENIDA</div>
+        <h2>Inicia sesión</h2>
+        <p>Entra a tu cuenta y continúa donde dejaste tus partidas, estadísticas y logros.</p>
+
+        <div class="social-login">
+          <button class="social-btn" data-provider="Google">
+            <span class="social-logo google-logo">G</span>
+            <span>Continuar con Google</span>
+          </button>
+          <button class="social-btn" data-provider="Apple">
+            <span class="social-logo apple-logo"></span>
+            <span>Continuar con Apple</span>
+          </button>
+          <button class="social-btn" data-provider="Facebook">
+            <span class="social-logo facebook-logo">f</span>
+            <span>Continuar con Facebook</span>
+          </button>
+        </div>
+
+        <div class="auth-divider">o</div>
+
+        <button class="guest-btn" id="demoLogin">Entrar a Raíces Play</button>
+
+        <div class="auth-legal">
+          Al continuar aceptas los términos de uso y la política de privacidad de Raíces Play.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <div class="app" id="app">
+    <div class="layout">
+
+      <aside class="sidebar" id="sidebar">
+        <div class="logo-block">
+          <div class="brand-mark">🌵</div>
+          <div class="logo-title">
+            <strong>Raíces Play</strong>
+            <small>Juega México</small>
+          </div>
+        </div>
+
+        <div class="nav-label">Menú principal</div>
+
+        <nav class="nav">
+          <button class="nav-item active" data-section="home">
+            <span class="nav-icon">⌂</span>
+            <span>Inicio</span>
+          </button>
+          <button class="nav-item" data-section="games">
+            <span class="nav-icon">🎮</span>
+            <span>Juegos</span>
+          </button>
+          <button class="nav-item" data-section="friends">
+            <span class="nav-icon">👥</span>
+            <span>Amigos</span>
+          </button>
+          <button class="nav-item" data-section="profile">
+            <span class="nav-icon">◉</span>
+            <span>Mi perfil</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+
+        <div class="sidebar-profile">
+          <div class="avatar" id="sidebarAvatar">
+            <span id="sidebarAvatarLetter">F</span>
+          </div>
+          <div class="sidebar-profile-info">
+            <strong id="sidebarUsername">Fexa</strong>
+            <span>Nivel 12 · Jugadora</span>
+          </div>
+          <button class="logout" id="logoutBtn" title="Cerrar sesión">↪</button>
+        </div>
+      </aside>
+
+      <main class="main" id="main" tabindex="-1">
+        <div class="mobile-topbar">
+          <button class="icon-btn" id="menuBtn">☰</button>
+          <div class="logo-block" style="padding:0">
+            <div class="brand-mark" style="width:38px;height:38px;font-size:18px">🌵</div>
+          </div>
+        </div>
+
+        <div class="topbar">
+          <div class="welcome">
+            <h2 id="welcomeTitle">Buenas, Fexa 👋</h2>
+            <p>Tu próxima partida está a un clic.</p>
+          </div>
+          <div class="top-actions">
+            <button class="icon-btn" title="Notificaciones">   <button class="icon-btn theme-toggle" id="themeToggle" type="button" aria-label="Cambiar entre modo día y noche"><span class="i-sun" aria-hidden="true">☀️</span><span class="i-moon" aria-hidden="true">🌙</span></button>🔔</button>
+            <button class="icon-btn" title="Buscar">⌕</button>
+          </div>
+        </div>
+
+        <!-- INICIO -->
+        <section class="page-section active" id="section-home">
+          <div class="hero">
+            <div class="pattern"></div>
+            <div class="hero-radial"></div>
+
+            <div class="hero-content">
+              <div class="hero-tag">🔥 PARTIDA DESTACADA · ESTA SEMANA</div>
+              <h1>La hora del<br><span>Yoyo.</span></h1>
+              <p>
+                Sacude la muñeca, encadena trucos y demuestra que tienes
+                la mejor mano del barrio. ¿Te atreves con el "paseíto"?
+              </p>
+              <div class="hero-actions">
+                <button class="btn-primary game-launch" data-game="Yoyo" data-icon="🪀">Jugar ahora</button>
+                <button class="btn-light" data-section-target="games">Ver todos los juegos</button>
+              </div>
+            </div>
+
+            <div class="hero-chips" aria-hidden="true">
+              <div class="hero-chip">🪀</div>
+              <div class="hero-chip">✈️</div>
+              <div class="hero-chip">🪢</div>
+            </div>
+          </div>
+
+          <div class="section-header">
+            <div>
+              <h3>Juegos de México</h3>
+              <p>Tradición convertida en partidas digitales.</p>
+            </div>
+            <button class="text-btn" data-section-target="games">Ver todos →</button>
+          </div>
+
+          <div class="games-grid">
+            <article class="game-card">
+              <div class="game-cover cover-yellow">
+                <div class="game-emoji">🪀</div>
+                <div class="game-badge">1–4 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Yoyo</h4>
+                <p>Encadena trucos, sube el combo y no dejes que se enrede.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5–10 min</span>
+                  <span class="meta-chip">🏆 8 logros</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Yoyo" data-icon="🪀">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card">
+              <div class="game-cover cover-blue">
+                <div class="game-emoji">🔵</div>
+                <div class="game-badge">2–4 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Canicas</h4>
+                <p>Apunta, calcula el rebote y gana la ronda.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 10 min</span>
+                  <span class="meta-chip">🏆 10 logros</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Canicas" data-icon="🔵">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card">
+              <div class="game-cover cover-green">
+                <div class="game-emoji">✈️</div>
+                <div class="game-badge">1–6 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Avionsito</h4>
+                <p>Dobla, lanza y haz volar tu avión de papel lo más lejos posible.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5 min</span>
+                  <span class="meta-chip">🏆 6 logros</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Avionsito" data-icon="✈️">Jugar</button>
+              </div>
+            </article>
+          </div>
+
+          <div class="section-header">
+            <div>
+              <h3>Tu actividad</h3>
+              <p>Así va tu progreso dentro de Raíces Play.</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-top"><span class="stat-icon">🎮</span><span>↗</span></div>
+              <strong>86</strong><span>Partidas jugadas</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span class="stat-icon">🏆</span><span>↗</span></div>
+              <strong>24</strong><span>Logros desbloqueados</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span class="stat-icon">👥</span><span>●</span></div>
+              <strong>8</strong><span>Amigos conectados</span>
+            </div>
+            <div class="stat-card">
+              <div class="stat-top"><span class="stat-icon">🔥</span><span>7 días</span></div>
+              <strong>12</strong><span>Racha actual</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- JUEGOS -->
+        <section class="page-section" id="section-games">
+          <div class="section-header" style="margin-top:0">
+            <div>
+              <h3>Todos los juegos</h3>
+              <p>Una colección hecha para volver a jugar juntos.</p>
+            </div>
+          </div>
+
+          <div class="games-filter">
+            <button class="filter-btn active" data-filter="all">Todos</button>
+            <button class="filter-btn" data-filter="skill">Habilidad</button>
+            <button class="filter-btn" data-filter="outdoor">Aire libre</button>
+            <button class="filter-btn" data-filter="classic">Clásicos</button>
+          </div>
+
+          <div class="games-page-grid" id="allGames">
+            <article class="game-card" data-category="skill classic">
+              <div class="game-cover cover-yellow">
+                <div class="game-emoji">🪀</div>
+                <div class="game-badge">1–4 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Yoyo</h4>
+                <p>El rey de la muñeca. Encadena trucos sin enredarte.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5–10 min</span>
+                  <span class="meta-chip">🔥 Popular</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Yoyo" data-icon="🪀">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card" data-category="skill classic">
+              <div class="game-cover cover-blue">
+                <div class="game-emoji">🔵</div>
+                <div class="game-badge">2–4 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Canicas</h4>
+                <p>Precisión, rebotes y mucha estrategia.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 10 min</span>
+                  <span class="meta-chip">🎯 Precisión</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Canicas" data-icon="🔵">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card" data-category="outdoor classic">
+              <div class="game-cover cover-green">
+                <div class="game-emoji">✈️</div>
+                <div class="game-badge">1–6 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Avionsito</h4>
+                <p>Dobla el papel, mide el viento y vuela lo más lejos.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5 min</span>
+                  <span class="meta-chip">🌬️ Vuelo</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Avionsito" data-icon="✈️">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card" data-category="skill classic">
+              <div class="game-cover cover-red">
+                <div class="game-emoji">🎯</div>
+                <div class="game-badge">1–4 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Balero</h4>
+                <p>Domina el ritmo y consigue la mayor cantidad de aciertos.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5 min</span>
+                  <span class="meta-chip">🏅 Desafíos</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Balero" data-icon="🎯">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card" data-category="skill outdoor classic">
+              <div class="game-cover cover-purple">
+                <div class="game-emoji">🪢</div>
+                <div class="game-badge">1–6 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Cuerda</h4>
+                <p>Salta al ritmo, sube la velocidad y no te enredes.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 5–10 min</span>
+                  <span class="meta-chip">💨 Ritmo</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Cuerda" data-icon="🪢">Jugar</button>
+              </div>
+            </article>
+
+            <article class="game-card" data-category="outdoor classic">
+              <div class="game-cover cover-brown">
+                <div class="game-emoji">🙈</div>
+                <div class="game-badge">3–10 jugadores</div>
+              </div>
+              <div class="game-info">
+                <h4>Escondidas</h4>
+                <p>Encuentra el escondite perfecto antes de que te vean.</p>
+                <div class="game-meta">
+                  <span class="meta-chip">⚡ 10–15 min</span>
+                  <span class="meta-chip">🫣 Sigilo</span>
+                </div>
+                <button class="play-btn game-launch" data-game="Escondidas" data-icon="🙈">Jugar</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- AMIGOS -->
+        <section class="page-section" id="section-friends">
+          <div class="section-header" style="margin-top:0">
+            <div>
+              <h3>Lista de amigos</h3>
+              <p>Mira quién está conectado y qué está jugando.</p>
+            </div>
+            <button class="btn-primary" id="inviteFriendBtn">+ Agregar amigo</button>
+          </div>
+
+          <div class="friends-layout">
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Mis amigos</h3>
+                <span style="font-size:11px;color:var(--muted)">12 amigos</span>
+              </div>
+
+              <div class="friends-search">
+                <span class="search-icon">⌕</span>
+                <input type="text" id="friendSearch" placeholder="Buscar por nombre de usuario..." autocomplete="off" />
+              </div>
+
+              <div class="friend-list" id="friendList">
+                <div class="friend-row" data-name="mariana_22">
+                  <div class="friend-avatar a">M</div>
+                  <div class="friend-info">
+                    <div class="friend-name">mariana_22</div>
+                    <div class="friend-game">🪀 Yoyo</div>
+                  </div>
+                  <div class="friend-status online"><span class="dot online"></span>En línea</div>
+                </div>
+
+                <div class="friend-row" data-name="charro_pixel">
+                  <div class="friend-avatar b">C</div>
+                  <div class="friend-info">
+                    <div class="friend-name">charro_pixel</div>
+                    <div class="friend-game">🔵 Canicas</div>
+                  </div>
+                  <div class="friend-status online"><span class="dot online"></span>En línea</div>
+                </div>
+
+                <div class="friend-row" data-name="luna.rosa">
+                  <div class="friend-avatar c">L</div>
+                  <div class="friend-info">
+                    <div class="friend-name">luna.rosa</div>
+                    <div class="friend-game">✈️ Avionsito</div>
+                  </div>
+                  <div class="friend-status online"><span class="dot online"></span>En línea</div>
+                </div>
+
+                <div class="friend-row" data-name="el_beto">
+                  <div class="friend-avatar d">B</div>
+                  <div class="friend-info">
+                    <div class="friend-name">el_beto</div>
+                    <div class="friend-game">🎯 Balero</div>
+                  </div>
+                  <div class="friend-status offline"><span class="dot offline"></span>Desconectado</div>
+                </div>
+
+                <div class="friend-row" data-name="xime.exe">
+                  <div class="friend-avatar e">X</div>
+                  <div class="friend-info">
+                    <div class="friend-name">xime.exe</div>
+                    <div class="friend-game">🪢 Cuerda</div>
+                  </div>
+                  <div class="friend-status online"><span class="dot online"></span>En línea</div>
+                </div>
+
+                <div class="friend-row" data-name="don_gallo">
+                  <div class="friend-avatar f">G</div>
+                  <div class="friend-info">
+                    <div class="friend-name">don_gallo</div>
+                    <div class="friend-game">🙈 Escondidas</div>
+                  </div>
+                  <div class="friend-status offline"><span class="dot offline"></span>Desconectado</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="mini-friend-card">
+                <h4>¿Nueva partida?</h4>
+                <p>Invita a tus amigos y crea una sala para comenzar a jugar juntos.</p>
+                <button class="add-friend" id="createRoomBtn">Crear sala privada</button>
+              </div>
+              <div style="height:1px;background:var(--line)"></div>
+              <div class="mini-friend-card">
+                <h4>Jugadores conectados</h4>
+                <p>Actualmente hay <strong style="color:var(--green)">1,284</strong> personas jugando.</p>
+                <div style="display:flex;gap:5px;align-items:center">
+                  <span class="dot online"></span>
+                  <span style="font-size:11px;color:var(--green);font-weight:800">Servidores activos</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PERFIL -->
+        <section class="page-section" id="section-profile">
+          <div class="section-header" style="margin-top:0">
+            <div>
+              <h3>Mi perfil</h3>
+              <p>Tu identidad dentro de Raíces Play.</p>
+            </div>
+          </div>
+
+          <div class="profile-header">
+            <div class="profile-head-content">
+              <div class="profile-avatar-wrap">
+                <div class="profile-avatar" id="profileAvatar">
+                  <span id="profileAvatarLetter">F</span>
+                </div>
+                <label class="avatar-upload" title="Cambiar foto de perfil">
+                  📷
+                  <input type="file" id="avatarInput" accept="image/*" hidden />
+                </label>
+              </div>
+
+              <div class="profile-basic">
+                <div class="eyebrow">JUGADORA · NIVEL 12</div>
+                <h1 id="profileUsername">Fexa</h1>
+                <p>Miembro desde 2026 · México 🇲🇽</p>
+              </div>
+
+              <div class="profile-level">
+                <div class="profile-level-head">
+                  <span>Nivel 12</span>
+                  <strong>7,420 XP</strong>
+                </div>
+                <div class="progress-track">
+                  <div class="progress-value"></div>
+                </div>
+                <div style="font-size:9px;color:rgba(255,255,255,.56);margin-top:8px">
+                  2,580 XP para nivel 13
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="profile-grid">
+            <div class="profile-card">
+              <h3>Información de cuenta</h3>
+
+              <div class="editable-row">
+                <div class="editable-label">Nombre de usuario</div>
+                <input class="edit-input" id="usernameInput" type="text" autocomplete="off" spellcheck="false" placeholder="Escribe tu nombre de usuario" />
+                <button class="save-name-btn" id="saveUsername">Guardar</button>
+              </div>
+
+              <div class="editable-row">
+                <div class="editable-label">Nivel</div>
+                <div class="editable-value">12</div>
+                <div style="font-size:11px;color:var(--muted)">7,420 XP</div>
+              </div>
+
+              <div class="editable-row">
+                <div class="editable-label">Partidas</div>
+                <div class="editable-value">86 jugadas</div>
+                <div style="font-size:11px;color:var(--green);font-weight:800">+12 esta semana</div>
+              </div>
+
+              <div class="editable-row">
+                <div class="editable-label">Mejor juego</div>
+                <div class="editable-value">Yoyo</div>
+                <div>🏆</div>
+              </div>
+            </div>
+
+            <div class="profile-card">
+              <h3>Mis logros</h3>
+              <div class="achievements">
+                <div class="achievement">
+                  <div class="achievement-icon">🪀</div>
+                  <div><strong>Rey del Yoyo</strong><span>Encadena 10 trucos seguidos.</span></div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">🔥</div>
+                  <div><strong>Racha perfecta</strong><span>Juega durante 7 días seguidos.</span></div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">✈️</div>
+                  <div><strong>Piloto experto</strong><span>Haz volar tu avionsito 50 metros.</span></div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">👥</div>
+                  <div><strong>La banda</strong><span>Juega con 5 amigos distintos.</span></div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">🪢</div>
+                  <div><strong>Saltarín</strong><span>Salta la cuerda 100 veces sin errar.</span></div>
+                </div>
+                <div class="achievement">
+                  <div class="achievement-icon">🙈</div>
+                  <div><strong>Camuflaje</strong><span>Gana 5 rondas de Escondidas.</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- MODAL DE JUEGO -->
+  <div class="modal" id="gameModal">
+    <div class="modal-card">
+      <div class="modal-top">
+        <div class="modal-icon" id="modalIcon">🪀</div>
+        <button class="close-modal" id="closeModal">×</button>
+      </div>
+
+      <h3 id="modalTitle">Yoyo</h3>
+      <p id="modalDescription">Prepárate para jugar.</p>
+
+      <div class="demo-game">
+        <div class="demo-game-title">
+          <span id="demoTitle">Vista previa de partida</span>
+          <span style="color:var(--green)">● Sala activa</span>
+        </div>
+
+        <div id="demoGameBody"></div>
+
+        <div class="demo-actions">
+          <button class="demo-action-btn secondary" id="resetBoard">Reiniciar</button>
+          <button class="demo-action-btn primary" id="drawCard">Acción</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- SCRIPTS (Orden importa) -->
+  <script src="js/core.js"></script>
+  <script src="js/sound.js"></script>
+  <script src="js/persistence.js"></script>
+  <script src="js/sanitize.js"></script>
+  <script src="js/yoyo.js"></script>
+  <script src="js/canicas.js"></script>
+  <script src="js/avionsito.js"></script>
+  <script src="js/balero.js"></script>
+  <script src="js/cuerda.js"></script>
+  <script src="js/escondidas.js"></script>
+  
+  <script src="js/ui/fx.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>

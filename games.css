@@ -1,0 +1,156 @@
+/* Estilos de los juegos reales (usa los tokens de styles.css; rem para escalar) */
+.demo-actions[hidden]{display:none}
+.g-rules{font-size:.85rem;line-height:1.6;color:var(--muted)}
+.g-levels{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.g-btn{flex:1;min-height:44px;padding:0 14px;border-radius:12px;background:var(--green);color:#fff;font-weight:800;font-size:.8rem;transition:background .2s}
+.g-btn:hover:not(:disabled){background:var(--green-dark)}
+.g-btn.alt{background:var(--ink)}
+.g-btn:disabled{opacity:.45;cursor:not-allowed}
+.g-btn:focus-visible,.lot-card:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.g-info{margin-top:10px;font-size:.8rem;font-weight:700;color:var(--muted);text-align:center}
+.g-res{font-size:1.5rem;text-align:center}
+.g-score{text-align:center;font-weight:800;color:var(--green);margin-top:6px}
+.lot-cur{text-align:center;font-size:1.6rem;font-weight:800;min-height:3rem;margin-bottom:10px}
+.lot-board{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.lot-card{aspect-ratio:1;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:1.5rem;display:grid;place-items:center;align-content:center;transition:.2s}
+.lot-card span{font-size:.58rem;font-weight:800;color:#59605b}
+.lot-card.on{background:var(--green);transform:scale(.95)}
+.lot-card.on span{color:#fff}
+.tr-top{font-size:4rem;text-align:center}
+.tr-top.spinning{animation:spinTrompo .5s linear infinite}
+.tr-bar{position:relative;height:30px;border-radius:15px;background:#e9e1cf;margin:16px 0;overflow:hidden}
+.tr-zone{position:absolute;top:0;bottom:0;background:#1fad72;opacity:.85}
+.tr-mark{position:absolute;top:0;bottom:0;width:6px;margin-left:-3px;background:var(--red)}
+.pi-pls{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pi-pl{padding:8px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:.75rem;font-weight:800}
+.pi-pl.act{border-color:var(--green);box-shadow:0 0 0 3px rgba(13,101,79,.15)}
+.pi-pl.out{opacity:.4}
+.pi-pot{text-align:center;font-weight:800;margin:10px 0}
+.pirinola-visual{margin:8px auto}
+.pi-log{list-style:none;font-size:.75rem;margin-top:10px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.spinning{animation:none!important}}
+/* Canicas */
+.ca-cv,.ba-cv{display:block;width:100%;max-width:320px;margin:10px auto;border-radius:16px;touch-action:none;border:1px solid var(--line)}
+.ca-cv:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+/* Balero */
+.ba-lanes{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:320px;margin:0 auto}
+/* Serpientes y Escaleras */
+.sn-start{font-size:.8rem;font-weight:800;margin-bottom:6px}
+.sn-board{display:grid;grid-template-columns:repeat(10,1fr);gap:2px;max-width:480px;margin:0 auto}
+.sn-c{position:relative;aspect-ratio:1;border-radius:4px;background:#faf7ef;border:1px solid var(--line);display:flex;flex-wrap:wrap;align-content:flex-end;overflow:hidden}
+.sn-c b{position:absolute;top:1px;left:2px;font-size:.5rem;color:#59605b}
+.sn-c::after{content:attr(data-i);position:absolute;top:0;right:1px;font-size:.65rem}
+.sn-l{background:var(--green-light)} .sn-s{background:var(--red-light)} .sn-g{background:var(--yellow-light)}
+.sn-t{font-size:.7rem;line-height:1}
+.sn-bar{display:flex;align-items:center;gap:12px;max-width:480px;margin:10px auto 0}
+.sn-die{font-size:2.6rem;line-height:1}
+/* ==========================================
+   PANTALLAS DE JUEGO (core.js)
+   ========================================== */
+.g-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--ink, #1d2520);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+}
+
+.g-rules {
+    font-size: 13px;
+    color: var(--muted, #6e756e);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    background: rgba(13, 101, 79, 0.06);
+    border-left: 3px solid var(--green, #0d654f);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+}
+
+.g-levels {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+
+.g-btn {
+    padding: 10px 16px;
+    background: var(--ink, #1d2520);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.g-btn:hover {
+    background: var(--green, #0d654f);
+    transform: translateY(-2px);
+}
+
+.g-btn:active {
+    transform: translateY(0);
+}
+
+.g-info {
+    font-size: 12px;
+    color: var(--ink, #1d2520);
+    font-weight: 700;
+    text-align: center;
+    margin: 10px 0 0;
+    padding: 8px 12px;
+    background: rgba(13, 101, 79, 0.06);
+    border-radius: 8px;
+}
+
+.g-end {
+    text-align: center;
+    padding: 30px 20px;
+    animation: fadeIn 0.4s ease;
+}
+
+.g-end-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 900;
+    color: var(--ink, #1d2520);
+    margin-bottom: 12px;
+}
+
+.g-end-msg {
+    font-size: 13px;
+    color: var(--muted, #6e756e);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.g-end-score {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--green, #0d654f);
+    margin-bottom: 22px;
+}
+
+.g-end-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.g-end-actions .g-btn {
+    padding: 12px 22px;
+    font-size: 14px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,161 @@
+/* ===== THEME.CSS — rediseño visual de Raíces Play =====
+   Se carga DESPUÉS de styles.css: redefine tokens y sobrescribe estilos sin tocar tus clases ni tus .js. */
+@property --a{syntax:"<angle>";inherits:false;initial-value:0deg}
+
+/* ---------- 1. DESIGN TOKENS ---------- */
+:root{
+  --gold:var(--yellow); --pink:#e56b8b; --pink-dark:#b83a60; --terra:#b8532f;
+  --green-text:#0d654f; --muted:#566058; --focus:#0b57d0;                 /* muted y focus afinados para contraste ≥4.5:1 */
+  --surface-strong:#fff; --glass:rgba(255,255,255,.72); --toast:#1e2923;
+  --font-display:"Bricolage Grotesque","DM Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1); --spring:cubic-bezier(.34,1.56,.64,1);
+  --s1:.25rem;--s2:.5rem;--s3:.75rem;--s4:1rem;--s5:1.5rem;--s6:2.5rem;     /* espaciado */
+  --shadow-sm:0 1px 2px rgba(18,29,23,.06),0 4px 12px rgba(18,29,23,.06);
+  --shadow:0 2px 4px rgba(18,29,23,.05),0 12px 24px rgba(18,29,23,.08),0 32px 64px rgba(18,29,23,.08);
+  --shadow-lg:0 4px 8px rgba(18,29,23,.08),0 24px 48px rgba(18,29,23,.14),0 48px 96px rgba(18,29,23,.14);
+  --tex:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .45 0 0 0 0 .33 0 0 0 0 .2 0 0 0 .55 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='.3'/></svg>");
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  color-scheme:dark; --bg:#1a1410; --bg-soft:#231b15; --surface:rgba(43,33,24,.82); --surface-strong:#2b2118; --glass:rgba(38,29,22,.74);
+  --ink:#f4ece0; --muted:#bdb1a1; --line:rgba(244,236,224,.14); --green-text:#5ccaa6; --green-light:#173b31; --red-light:#4a2520; --yellow-light:#4a3a14;
+  --focus:#ffd166; --toast:#f4ece0;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.3); --shadow:0 12px 24px rgba(0,0,0,.35),0 32px 64px rgba(0,0,0,.35); --shadow-lg:0 24px 48px rgba(0,0,0,.5),0 48px 96px rgba(0,0,0,.5);
+}
+/* El login conserva su propia paleta clara en ambos modos */
+.auth-card{--ink:#1d2520;--muted:#566058;--line:rgba(29,37,32,.09);--surface-strong:#fff;color:var(--ink)}
+
+/* ---------- 2. BASE Y TIPOGRAFÍA ---------- */
+html{font-size:100%}
+body{background:var(--tex),radial-gradient(circle at 15% 10%,rgba(13,101,79,.09),transparent 28%),radial-gradient(circle at 90% 20%,rgba(229,107,139,.09),transparent 28%),var(--bg);background-attachment:fixed;color:var(--ink)}
+h1,h2,h3,.logo-title strong,.stat-card strong,.hero h1,.auth-copy h1,.profile-basic h1,.game-info h4{font-family:var(--font-display);font-weight:800;letter-spacing:-.03em}
+.hero h1,.auth-copy h1,.profile-basic h1{font-family:var(--font-display)}
+.welcome h2{font-size:clamp(1.5rem,3vw,2rem)} .section-header h3{font-size:clamp(1.25rem,2.4vw,1.6rem)} .game-info p,.section-header p{font-size:.85rem}
+::selection{background:var(--gold);color:#1d2520}
+html{scrollbar-width:thin;scrollbar-color:var(--green) transparent}
+::-webkit-scrollbar{width:11px;height:11px} ::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--green),var(--red));border-radius:9px;border:3px solid var(--bg)}
+/* Contraste: textos pequeños que estaban en grises claros */
+.nav-label,.sidebar-profile-info span,.editable-label,.auth-legal,.auth-divider,.search-icon,.friend-status.offline,.logout{color:var(--muted)}
+.text-btn,.friend-status.online,.stat-icon,.mini-friend-card strong{color:var(--green-text)}
+.stat-icon{background:var(--green-light)}
+
+/* ---------- 3. ACCESIBILIDAD ---------- */
+.skip-link{position:fixed;left:1rem;top:-4rem;z-index:5000;padding:.75rem 1.1rem;border-radius:12px;background:var(--ink);color:var(--bg);font-weight:800;transition:top .25s var(--ease)}
+.skip-link:focus{top:1rem}
+:focus{outline:none}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:10px}
+:is(.hero,.profile-header,.auth-visual) :focus-visible{outline-color:#fff}
+input:focus-visible{outline-offset:1px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .hero-fx,.cursor-dot,.cursor-ring{display:none!important}
+}
+
+/* ---------- 4. PAPEL PICADO CON ONDA ---------- */
+.paper-cut span{transform-origin:top center;animation:wave 3.6s ease-in-out infinite;filter:drop-shadow(0 2px 2px rgba(0,0,0,.15))}
+.paper-cut span:nth-child(3n+2){animation-delay:.35s} .paper-cut span:nth-child(3n){animation-delay:.7s}
+@keyframes wave{0%,100%{transform:rotate(-2deg) scaleY(1)}50%{transform:rotate(2deg) scaleY(1.12)}}
+
+/* ---------- 5. BOTONES (3D + ripple + spinner) ---------- */
+:is(.btn-primary,.btn-light,.guest-btn,.play-btn,.add-friend,.save-name-btn,.demo-action-btn,.g-btn,.social-btn){position:relative;overflow:hidden;transition:transform .2s var(--spring),box-shadow .2s,background .2s;will-change:transform}
+.btn-primary{box-shadow:0 4px 0 var(--red-dark),0 10px 20px rgba(0,0,0,.15)} .btn-primary:active{transform:translateY(3px);box-shadow:0 1px 0 var(--red-dark)}
+.btn-light{box-shadow:0 4px 0 #d9d2c0,0 10px 20px rgba(0,0,0,.1)} .btn-light:active{transform:translateY(3px);box-shadow:0 1px 0 #d9d2c0}
+.guest-btn,.add-friend,.save-name-btn{box-shadow:0 4px 0 var(--green-dark)} :is(.guest-btn,.add-friend,.save-name-btn):active{transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+.play-btn{box-shadow:0 4px 0 #000} .play-btn:hover{background:var(--green);box-shadow:0 4px 0 var(--green-dark)} .play-btn:active{transform:translateY(3px);box-shadow:0 1px 0 #000}
+.ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.55);transform:scale(0);animation:ripple .6s linear;pointer-events:none}
+@keyframes ripple{to{transform:scale(4);opacity:0}}
+.is-loading{pointer-events:none;color:transparent!important}
+.is-loading::after{content:"";position:absolute;inset:0;margin:auto;width:1.2rem;height:1.2rem;border:3px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.icon-btn{transition:transform .25s var(--spring),box-shadow .2s;background:var(--surface-strong)}
+.icon-btn:hover{transform:translateY(-3px) rotate(-6deg)}
+.theme-toggle .i-moon{display:none} [data-theme="dark"] .theme-toggle .i-sun{display:none} [data-theme="dark"] .theme-toggle .i-moon{display:inline}
+html.theme-anim *{transition:background-color .45s,color .45s,border-color .45s!important}
+
+/* ---------- 6. SIDEBAR ---------- */
+.nav-item{position:relative}
+.nav-item.active::before{content:"";position:absolute;left:3px;top:22%;height:56%;width:4px;border-radius:4px;background:var(--gold);animation:grow .35s var(--spring)}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.nav-icon{transition:transform .3s var(--spring)} .nav-item:hover .nav-icon{transform:rotate(-10deg) scale(1.18)}
+.nav-item.active{background:linear-gradient(135deg,var(--green),#17805f)}
+
+/* ---------- 7. HERO ---------- */
+.hero{background:linear-gradient(110deg,#04362b 0%,#0d654f 55%,#1a7f62 100%)}
+.hero-fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.hero h1 span,.auth-copy h1 span{background:linear-gradient(90deg,#f1c15c,#e56b8b,#f1c15c,#e9ba51);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:250% 0}}
+.hero :is(.hero-tag,h1,p,.hero-actions){animation:rise .8s var(--ease) both}
+.hero h1{animation-delay:.1s}.hero p{animation-delay:.25s}.hero-actions{animation-delay:.4s}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hero-chip{animation:float 5s ease-in-out infinite}.hero-chip:nth-child(2){animation-delay:-1.6s}.hero-chip:nth-child(3){animation-delay:-3.2s}
+@keyframes float{50%{translate:0 -10px}}
+.hero p{color:rgba(255,255,255,.88)}
+
+/* ---------- 8. TARJETAS DE JUEGO (tilt 3D, shimmer, borde luminoso) ---------- */
+.game-card,.game-card:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) scale(var(--sc,1));transform-style:preserve-3d}
+.game-card{background:var(--surface);transition:transform .18s ease-out,box-shadow .3s,border-color .3s}
+.game-card:hover{--ty:-6px;--sc:1.02;box-shadow:var(--shadow-lg)}
+.game-card::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:0;transition:opacity .3s;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.28),transparent 60%)}
+.game-card:hover::before{opacity:1}
+.game-card::after{inset:0;right:auto;top:auto;width:auto;height:auto;border-radius:inherit;padding:2px;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:conic-gradient(from var(--a),var(--green),var(--gold),var(--pink),var(--red),var(--green));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);animation:spin-a 4s linear infinite}
+.game-card:hover::after,.game-card:focus-within::after{opacity:1}
+@keyframes spin-a{to{--a:360deg}}
+.game-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.4) 50%,transparent 60%);transform:translateX(-120%)}
+.game-card:hover .game-cover::after{transform:translateX(120%);transition:transform .9s var(--ease)}
+.game-emoji{transition:transform .4s var(--spring)} .game-card:hover .game-emoji{transform:rotate(6deg) scale(1.12)}
+.meta-chip{background:var(--bg-soft);color:var(--muted)}
+
+/* ---------- 9. CARGA (skeleton) ---------- */
+.loading :is(.game-card,.stat-card){background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%) 0 0/200% 100%,var(--line);animation:sk 1.1s linear infinite;min-height:7rem}
+.loading :is(.game-card,.stat-card)>*{visibility:hidden}
+@keyframes sk{to{background-position:-200% 0}}
+
+/* ---------- 10. MODAL (glassmorphism) ---------- */
+.modal{background:rgba(10,23,18,.55);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);transition:opacity .3s var(--ease),visibility .3s}
+.modal-card{background:var(--glass);backdrop-filter:blur(26px) saturate(1.4);-webkit-backdrop-filter:blur(26px) saturate(1.4);border:1px solid rgba(255,255,255,.35);box-shadow:var(--shadow-lg);transform:translateY(24px) scale(.94);opacity:0;transition:transform .45s var(--spring),opacity .3s}
+.modal.open .modal-card{transform:none;opacity:1}
+.modal-card h3{font-family:var(--font-display)} .demo-game{background:var(--bg-soft)}
+.close-modal{background:var(--surface-strong);color:var(--ink);box-shadow:0 3px 0 var(--line);transition:transform .2s var(--spring),box-shadow .2s}
+.close-modal:hover{transform:translateY(-2px) rotate(90deg);box-shadow:0 5px 0 var(--line)} .close-modal:active{transform:translateY(2px);box-shadow:none}
+#demoGameBody>*{animation:rise .5s var(--ease) both}
+#demoGameBody>:nth-child(2){animation-delay:.08s}#demoGameBody>:nth-child(3){animation-delay:.16s}#demoGameBody>:nth-child(4){animation-delay:.24s}
+/* Marco mexicano para cualquier canvas de juego y botones 3D de los juegos */
+#demoGameBody canvas{max-width:100%!important;height:auto;border-radius:16px;box-shadow:0 0 0 3px var(--green),0 0 0 6px var(--gold),0 0 0 9px var(--red),var(--shadow)}
+.g-info{font-size:.95rem;color:var(--muted)}
+.g-btn{box-shadow:0 4px 0 var(--green-dark)} .g-btn:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+
+/* ---------- 11. MODO OSCURO: superficies con colores fijos ---------- */
+[data-theme="dark"] :is(.game-card,.panel,.profile-card,.stat-card,.achievement,.friends-search input,.edit-input,.filter-btn,.demo-game,.close-modal){background-color:var(--surface-strong);color:var(--ink)}
+[data-theme="dark"] .sidebar{background:var(--surface)} [data-theme="dark"] .filter-btn.active{background:var(--green);color:#fff}
+[data-theme="dark"] :is(.btn-light){background:#f4ece0}
+[data-theme="dark"] .play-btn{background:#3a2d22}[data-theme="dark"] .play-btn:hover{background:var(--green)}
+
+/* ---------- 12. TOAST, CURSOR, CONFETI ---------- */
+.toast{display:flex;align-items:center;gap:.6rem;background:var(--toast);color:var(--bg);border-left:4px solid var(--gold);font-size:.85rem;padding:.8rem 1.1rem}
+.toast::before{content:"✨";font-size:1.15rem}
+.cursor-dot,.cursor-ring{position:fixed;left:0;top:0;z-index:5000;pointer-events:none;border-radius:50%;opacity:0;transition:opacity .3s,width .25s,height .25s,background .25s}
+.cursor-dot{width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--red)}
+.cursor-ring{width:36px;height:36px;margin:-18px 0 0 -18px;border:2px solid var(--green)}
+html.has-cursor .cursor-dot,html.has-cursor .cursor-ring{opacity:1}
+html.has-cursor,html.has-cursor :is(a,button,label,.game-card){cursor:none}
+.cursor-ring.hot{width:56px;height:56px;margin:-28px 0 0 -28px;background:rgba(229,107,139,.18);border-color:var(--pink)}
+.confetti{position:fixed;inset:0;z-index:4000;pointer-events:none}
+
+/* ---------- 13. RESPONSIVE ---------- */
+.game-cover,.hero{min-width:0} canvas{max-width:100%}
+@media (min-width:768px) and (max-width:1024px){.main{padding:1.5rem 1.75rem 3rem}.games-grid,.games-page-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats-grid{grid-template-columns:repeat(2,1fr)}.hero{padding:2rem}}
+@media (max-width:900px){
+  .sidebar{display:flex;top:auto;bottom:12px;left:12px;right:12px;width:auto;border-radius:24px;background:var(--glass);backdrop-filter:blur(20px);transform:translateY(120%);opacity:0;visibility:hidden;transition:transform .45s var(--ease),opacity .3s,visibility 0s .45s}
+  .sidebar.mobile-open{transform:none;opacity:1;visibility:visible;transition:transform .45s var(--ease),opacity .3s,visibility 0s}
+  .nav{grid-template-columns:repeat(2,1fr)}
+  .mobile-topbar .icon-btn{width:48px;height:48px}
+}
+@media (max-width:700px){
+  .top-actions{display:flex} .topbar{align-items:center}
+  .modal{padding:0;align-items:flex-end} .modal-card{width:100%;max-height:94vh;border-radius:28px 28px 0 0;padding:1.25rem}
+  .hero{min-height:20rem;padding:1.6rem 1.3rem} .stats-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:480px){.main{padding:1rem .9rem 2.5rem}.stats-grid{grid-template-columns:1fr 1fr;gap:.6rem}.game-cover{height:9rem}}
